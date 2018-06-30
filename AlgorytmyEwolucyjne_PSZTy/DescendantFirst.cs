@@ -1,4 +1,6 @@
-﻿namespace Knapsack_Problem
+﻿using System.Linq;
+
+namespace Knapsack_Problem
 {
     public class DescendantFirst : IDescendantMethods
     {
@@ -23,15 +25,29 @@
 
             FitnessFuntionValue = 0;
 
-            if (!thisParticipant.Declarations.ContainsKey(thisRealization.CourseTypeId)) return 0;
+            if (!thisParticipant.Declarations.ContainsKey(thisRealization.CourseTypeId))
+                return 0;
             // this realization is not interesting for participant
 
 
-            for (var i = 0; i < thisParticipant.Preferences.Count; i++)
-            {
-                var preferedFriend = Scheduler.Participants[thisParticipant.Preferences[i]];
-                if (preferedFriend.Declarations.ContainsValue(thisRealization.CourseTypeId)) ++preferedParticipantsInGroup;
-            }
+            //for (var i = 0; i < thisParticipant.Preferences.Count; i++)
+            //{
+            //    var preferedFriend = Scheduler.Participants[thisParticipant.Preferences[i]];
+            //    if (preferedFriend.Declarations.ContainsValue(thisRealization.CourseTypeId)) ++preferedParticipantsInGroup;
+            //}
+
+            //foreach (var pref in thisParticipant.Preferences)
+            //{
+            //    var preferedFriend = Scheduler.Participants[pref];
+            //    if (preferedFriend.Declarations.ContainsValue(thisRealization.CourseTypeId))
+            //        ++preferedParticipantsInGroup;
+            //}
+
+
+            preferedParticipantsInGroup += thisParticipant.Preferences
+                .Select(x => Scheduler.Participants[x])
+                .Count(x => x.Declarations.ContainsValue(thisRealization.CourseTypeId));
+
 
             FitnessFuntionValue = (preferedCoursesNumber * 590 + (preferedParticipantsInGroup ^ 2) * 30);
 

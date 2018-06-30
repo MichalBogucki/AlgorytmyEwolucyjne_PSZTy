@@ -57,8 +57,7 @@ namespace Knapsack_Problem
 
         public string PrintParticipantIo()
         {
-            var output = ""
-                    + "Participant ID #" + ParticipantId + "\nCourse you are enrolled on:";
+            var output = $"Participant ID #{ParticipantId} \nCourse you are enrolled on:";
             foreach (var m in Declarations)
             {
                 if (m.Value != -1)
@@ -66,8 +65,7 @@ namespace Knapsack_Problem
                     var tempRoomId = Scheduler.Realizations[m.Value].RoomId;
                     if (tempRoomId != -1)
                     {
-                        output += "\n\t\t Realization: #" + m.Value + ",";
-                        output += "\tRoom: #" + tempRoomId;
+                        output += $"\n\t\t Realization: #{m.Value},\tRoom: #{tempRoomId}";
                     }
                 }
             }

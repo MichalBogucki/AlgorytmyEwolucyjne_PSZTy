@@ -26,6 +26,7 @@ namespace Knapsack_Problem
             var output = "";
             _successfulDescendantRatioThread = 1;
             var iterationCounter = 0;
+
             while (_successfulDescendantRatioThread >= 0.1 || iterationCounter < 25)
             {
                 _mThread = 10;
@@ -45,8 +46,8 @@ namespace Knapsack_Problem
                 }
                 _successfulDescendantRatioThread = _successAmountThread / (double)_mThread;
                 iterationCounter++;
-                output += "Loop " + iterationCounter + ":\tFinalProfit is " + Scheduler.CalculateFinalProfit() + "\n";
-                Console.WriteLine($"Final profit: {Scheduler.CalculateFinalProfit()}  i:{iterationCounter}");
+
+                output += $"Loop {iterationCounter}:\tFinalProfit is {Scheduler.CalculateFinalProfit()}\n";
             }
 
             //writing final profits output to a file
@@ -62,27 +63,13 @@ namespace Knapsack_Problem
 
         public DescendantSecond EvolutionaryAlgorithm()
         {
+            SetAlgorithmVariables();
+            TryGeneratingBetterDescendant();
 
-            _successAmount = 0;
-            _mIteration = 200;
-            _sigmaRealization = 3;
-            _sigmaRoom = 3;
-            _successRatio = 0;
-
-            //Random rand = new Random();
-            for (var i = 0; i < _mIteration; i++)
+            if (_current == null)
             {
-                _current = new DescendantSecond(RandomInitializer.Rand.Next(Scheduler.RealizationsAmount), 
-                    RandomInitializer.Rand.Next(Scheduler.RoomsAmount));
-
-                _current.CalculateFitnessFunction();
-                if (ValidateDescendant(_current)) { break; }
-
-                _swappingDescendant = _current;
-                _current = null;
+                return null;
             }
-
-            if (_current == null) return null;
 
             while (_sigmaRealization > 0.01)
             {
@@ -91,28 +78,82 @@ namespace Knapsack_Problem
 
                 for (var i = 0; i < _mIteration; i++)
                 {
-                    var newRealizationId = _current.RealizationId +
-                            (int)(_sigmaRealization * (RandomInitializer.Rand.NextDouble() * Scheduler.RealizationsIndexJump));
-                    if (newRealizationId > (Scheduler.RealizationsAmount - 1)) newRealizationId %= Scheduler.RealizationsAmount;
+                    var newRealizationId = GenerateNewRealizationIdFromCurrentDescendant();
+                    var newRoomId = GenerateNewRoomIdFromCurrentDescendant();
 
-                    var newRoomId = _current.RoomId +
-                            (int)(_sigmaRoom * (RandomInitializer.Rand.NextDouble() * Scheduler.RoomsIndexJump));
-                    if (newRoomId > (Scheduler.RoomsAmount - 1)) newRoomId %= Scheduler.RoomsAmount;
-                    _next = new DescendantSecond(newRealizationId, newRoomId);
-                    _next.CalculateFitnessFunction();
-
-                    if ((_next.FitnessFuntionValue > _current.FitnessFuntionValue) && ValidateDescendant(_next))
-                    {
-                        _current = _next;
-                        ++_successAmount;
-                    }
+                    GenerateNextDescendant(newRealizationId, newRoomId);
+                    AssignNextToCurrentIfBecameBetter();
                 }
                 _successRatio = _successAmount / (double)_mIteration;
-
                 SetSigmas();
             }
 
             return _current;
+        }
+
+        private void SetAlgorithmVariables()
+        {
+            _successAmount = 0;
+            _mIteration = 200;
+            _sigmaRealization = 3;
+            _sigmaRoom = 3;
+            _successRatio = 0;
+        }
+
+        private void TryGeneratingBetterDescendant()
+        {
+            for (var i = 0; i < _mIteration; i++)
+            {
+                _current = new DescendantSecond(RandomInitializer.Rand.Next(Scheduler.RealizationsAmount),
+                    RandomInitializer.Rand.Next(Scheduler.RoomsAmount));
+
+                _current.CalculateFitnessFunction();
+                if (ValidateDescendant(_current)) { break; }
+
+                _swappingDescendant = _current;
+                _current = null;
+            }
+        }
+
+        private int GenerateNewRealizationIdFromCurrentDescendant()
+        {
+            var newRealizationId = _current.RealizationId +
+                    (int)(_sigmaRealization * (RandomInitializer.Rand.NextDouble() * Scheduler.RealizationsIndexJump));
+
+            if (newRealizationId > (Scheduler.RealizationsAmount - 1))
+            {
+                newRealizationId %= Scheduler.RealizationsAmount;
+            }
+
+            return newRealizationId;
+        }
+
+        private int GenerateNewRoomIdFromCurrentDescendant()
+        {
+            var newRoomId = _current.RoomId +
+                    (int)(_sigmaRoom * (RandomInitializer.Rand.NextDouble() * Scheduler.RoomsIndexJump));
+
+            if (newRoomId > (Scheduler.RoomsAmount - 1))
+            {
+                newRoomId %= Scheduler.RoomsAmount;
+            }
+
+            return newRoomId;
+        }
+
+        private void GenerateNextDescendant(int newRealizationId, int newRoomId)
+        {
+            _next = new DescendantSecond(newRealizationId, newRoomId);
+            _next.CalculateFitnessFunction();
+        }
+
+        private void AssignNextToCurrentIfBecameBetter()
+        {
+            if ((_next.FitnessFuntionValue > _current.FitnessFuntionValue) && ValidateDescendant(_next))
+            {
+                _current = _next;
+                ++_successAmount;
+            }
         }
 
         public bool ValidateDescendant(DescendantSecond descendant)

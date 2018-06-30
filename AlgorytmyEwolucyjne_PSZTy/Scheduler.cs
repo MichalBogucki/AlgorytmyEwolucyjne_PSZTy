@@ -66,15 +66,15 @@ namespace Knapsack_Problem
         public static void WriteRealizationsToFile() 
         {
 
-            var fileName = "Realizations.txt";
-            var path = @"..\..\_ResultsTxt\" + fileName;
+            const string fileName = "Realizations.txt";
+            const string path = @"..\..\_ResultsTxt\" + fileName;
 
             var realizationsAssigned = 0;
             var output = String.Empty;
 
             foreach (var r in Realizations)
             {
-                output = output + r.PrintRealizationIo() + "\n";
+                output += $"{r.PrintRealizationIo()}\n";
             }
 
             foreach (var r in Realizations)
@@ -82,15 +82,15 @@ namespace Knapsack_Problem
                 if (r.RoomId != -1) realizationsAssigned++;
             }
 
-            output = output + "\n\n\n" + "Realizations assigned: " + realizationsAssigned + "/" + RealizationsAmount;
+            output += $"\n\n\nRealizations assigned: {realizationsAssigned} / {RealizationsAmount}";
 
             File.WriteAllText(path, output);
         }
 
         public static void WriteScheduleToFile() 
         {
-            var fileName = "Room_Schedule.txt";
-            var path = @"..\..\_ResultsTxt\" + fileName;
+            const string fileName = "Room_Schedule.txt";
+            const string path = @"..\..\_ResultsTxt\" + fileName;
 
             var output = String.Empty;
 
@@ -106,22 +106,22 @@ namespace Knapsack_Problem
 
         public static void WriteFinalProfitToFile(string output) 
         {
-            var fileName = "Final_Profit.txt";
-            var path = @"..\..\_ResultsTxt\" + fileName;
+            const string fileName = "Final_Profit.txt";
+            const string path = @"..\..\_ResultsTxt\" + fileName;
 
             File.WriteAllText(path, output);
         }
 
         public static void WriteParticipantsToFile() 
         {
-            var fileName = "Participants_Courses.txt";
-            var path = @"..\..\_ResultsTxt\" + fileName;
+            const string fileName = "Participants_Courses.txt";
+            const string path = @"..\..\_ResultsTxt\" + fileName;
 
-            var output = String.Empty;
+            var output = string.Empty;
 
             foreach (var p in Participants)
             {
-                output = output + p.PrintParticipantIo() + "\n";
+                output += p.PrintParticipantIo() + "\n";
             }
 
             File.WriteAllText(path, output);

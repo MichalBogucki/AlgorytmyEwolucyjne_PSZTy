@@ -19,7 +19,6 @@
 
         public static void GetCourseTypes()
         {
-
             Scheduler.CourseTypes.Add(new CourseType(7, 30, 10000, 900));
             Scheduler.CourseTypes.Add(new CourseType(6, 20, 8000, 750));
             Scheduler.CourseTypes.Add(new CourseType(5, 35, 8000, 540));
