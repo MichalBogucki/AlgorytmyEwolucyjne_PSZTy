@@ -42,8 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CourseType.cs" />
+    <Compile Include="DescendantFirst.cs" />
+    <Compile Include="DescendantSecond.cs" />
+    <Compile Include="FirstMatch.cs" />
+    <Compile Include="IDescendantMethods.cs" />
+    <Compile Include="Participant.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomInitializer.cs" />
+    <Compile Include="Realization.cs" />
+    <Compile Include="Room.cs" />
+    <Compile Include="Scheduler.cs" />
+    <Compile Include="SecondMatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

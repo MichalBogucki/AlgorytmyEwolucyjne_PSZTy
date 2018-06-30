@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackProblem", "AlgorytmyEwolucyjne_PSZTy\KnapsackProblem.csproj", "{E6994EC4-91F9-40DF-BB62-6172B1CA295E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_ResultsTxt", "_ResultsTxt", "{51939344-DAB8-47E8-B130-81EB67E0E797}"
+	ProjectSection(SolutionItems) = preProject
+		AlgorytmyEwolucyjne_PSZTy\_ResultsTxt\Final_Profit.txt = AlgorytmyEwolucyjne_PSZTy\_ResultsTxt\Final_Profit.txt
+		AlgorytmyEwolucyjne_PSZTy\_ResultsTxt\Participants_Courses.txt = AlgorytmyEwolucyjne_PSZTy\_ResultsTxt\Participants_Courses.txt
+		AlgorytmyEwolucyjne_PSZTy\_ResultsTxt\Realizations.txt = AlgorytmyEwolucyjne_PSZTy\_ResultsTxt\Realizations.txt
+		AlgorytmyEwolucyjne_PSZTy\_ResultsTxt\Room_Schedule.txt = AlgorytmyEwolucyjne_PSZTy\_ResultsTxt\Room_Schedule.txt
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KnapsackProblemTests", "AlgorytmyEwolucyjne_PSZTyTests\KnapsackProblemTests.csproj", "{E71194C3-BA81-4A68-94E3-7270A101E936}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E6994EC4-91F9-40DF-BB62-6172B1CA295E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6994EC4-91F9-40DF-BB62-6172B1CA295E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6994EC4-91F9-40DF-BB62-6172B1CA295E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6994EC4-91F9-40DF-BB62-6172B1CA295E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E71194C3-BA81-4A68-94E3-7270A101E936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71194C3-BA81-4A68-94E3-7270A101E936}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71194C3-BA81-4A68-94E3-7270A101E936}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71194C3-BA81-4A68-94E3-7270A101E936}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C4AC2D50-B865-4181-84EA-AD4590B919D0}
+	EndGlobalSection
+EndGlobal
